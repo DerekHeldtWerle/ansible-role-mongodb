@@ -24,9 +24,7 @@
   when: mongodb_is_systemd
 
 - name: Add APT key
-  apt_key:
-    keyserver: "{{ mongodb_apt_keyserver }}"
-    id: "{{ mongodb_apt_key_id[mongodb_major_version] }}"
+  shell: "sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv {{ mongodb_apt_key_id[mongodb_major_version] }}"
   when: mongodb_package == 'mongodb-org'
 
 - name: Fail when used wrong mongodb_version variable

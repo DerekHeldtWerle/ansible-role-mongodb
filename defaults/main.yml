@@ -34,7 +34,7 @@ mongodb_processmanagement_fork: "{{ 'RedHat' == ansible_os_family }}"
 
 ## security Options
 # Disable or enable security. Possible values: 'disabled', 'enabled'
-mongodb_security_authorization: "disabled"
+mongodb_security_authorization: "enabled"
 mongodb_security_keyfile: /etc/mongodb-keyfile   # Specify path to keyfile with password for inter-process authentication
 
 ## storage Options
@@ -58,7 +58,7 @@ mongodb_systemlog_logappend: true                                        # Appen
 mongodb_systemlog_path: /var/log/mongodb/{{ mongodb_daemon_name }}.log   # Log file to send write to instead of stdout
 
 ## replication Options
-mongodb_replication_replset:                      # Enable replication <setname>[/<optionalseedhostlist>]
+mongodb_replication_replset: true                      # Enable replication <setname>[/<optionalseedhostlist>]
 mongodb_replication_replindexprefetch: "all"      # specify index prefetching behavior (if secondary) [none|_id_only|all]
 mongodb_replication_oplogsize: 1024               # specifies a maximum size in megabytes for the replication operation log
 
@@ -71,23 +71,22 @@ mongodb_mms_base_url: https://mms.mongodb.com
 # password for inter-process authentication
 # please regenerate this file on production environment with command 'openssl rand -base64 741'
 mongodb_keyfile_content: |
-  8pYcxvCqoe89kcp33KuTtKVf5MoHGEFjTnudrq5BosvWRoIxLowmdjrmUpVfAivh
-  CHjqM6w0zVBytAxH1lW+7teMYe6eDn2S/O/1YlRRiW57bWU3zjliW3VdguJar5i9
-  Z+1a8lI+0S9pWynbv9+Ao0aXFjSJYVxAm/w7DJbVRGcPhsPmExiSBDw8szfQ8PAU
-  2hwRl7nqPZZMMR+uQThg/zV9rOzHJmkqZtsO4UJSilG9euLCYrzW2hdoPuCrEDhu
-  Vsi5+nwAgYR9dP2oWkmGN1dwRe0ixSIM2UzFgpaXZaMOG6VztmFrlVXh8oFDRGM0
-  cGrFHcnGF7oUGfWnI2Cekngk64dHA2qD7WxXPbQ/svn9EfTY5aPw5lXzKA87Ds8p
-  KHVFUYvmA6wVsxb/riGLwc+XZlb6M9gqHn1XSpsnYRjF6UzfRcRR2WyCxLZELaqu
-  iKxLKB5FYqMBH7Sqg3qBCtE53vZ7T1nefq5RFzmykviYP63Uhu/A2EQatrMnaFPl
-  TTG5CaPjob45CBSyMrheYRWKqxdWN93BTgiTW7p0U6RB0/OCUbsVX6IG3I9N8Uqt
-  l8Kc+7aOmtUqFkwo8w30prIOjStMrokxNsuK9KTUiPu2cj7gwYQ574vV3hQvQPAr
-  hhb9ohKr0zoPQt31iTj0FDkJzPepeuzqeq8F51HB56RZKpXdRTfY8G6OaOT68cV5
-  vP1O6T/okFKrl41FQ3CyYN5eRHyRTK99zTytrjoP2EbtIZ18z+bg/angRHYNzbgk
-  lc3jpiGzs1ZWHD0nxOmHCMhU4usEcFbV6FlOxzlwrsEhHkeiununlCsNHatiDgzp
-  ZWLnP/mXKV992/Jhu0Z577DHlh+3JIYx0PceB9yzACJ8MNARHF7QpBkhtuGMGZpF
-  T+c73exupZFxItXs1Bnhe3djgE3MKKyYvxNUIbcTJoe7nhVMrwO/7lBSpVLvC4p3
-  wR700U0LDaGGQpslGtiE56SemgoP
-
+  Mq9yLv8zl1yr8xzviIZArY/V0bikTPSR2Gb5Vw3LRpDcn4UQ2mWfG+FtTYeSJ196
+  htwGb1B59pVPHQ6qJTbwxfubHvhh5L1vtHmcnEjeIKA8Nxyu5aJN5x8sii0gqWci
+  KTqGJkeIRJfEtqsq5MxOUHct5+LdkyG/Y7i1Ld3i3kkzcsDjsWGyuplz4ebuR6sw
+  c8NTLRI32FSdZCxvDJbGct5kv7GinZkL2fNcoUbfyZMUlQ8cmf+DiOu4nfz8HuBY
+  M11nXpPURsXMPw4BsBi2geqwP6+DemiV31UOdZ+Bid8f/zjDdZDgGgiG46q3cjFX
+  75n3E68Q1qcwDXtqaIz8m952o6YEymAscVfyLVZPQNGkQUPEH8BEKGbcLcf78DYd
+  2i+ZwImYP4xLwkIyy8dzmPa8Bt9TQK3ro2ZtIEVll0td6OvKfppPXc4B6KZNyei6
+  ZTEQGevc2EVbtQnAr0sV9NSbSiq8xLUXfp5ZL/WBg6dUtt9XSUOHBucC9/PD1PyB
+  44mW8THrhuIb2saphr04d6ZLjl72vKqxUxlwO67VhIUbREXeHhONFYiGFRMUJLpT
+  O4uJuKF/Fs8Xa0378n3wVrLJE0Rrrcvd2bdjzlGvns7OS8fK51/tL8kB5fg0T4sN
+  ztVLVIVscMGpjdb8ZCnsYO2/54ZADHqAxzCcZiTY045U78sQdEfdOTcY4mrRtHCP
+  xBeL5/ybUPm9OdeX64cvrLMAkBd+Hn8V3oc/bdkMwvKff7glixLAm4HZg9ELsUzA
+  FhUbJ57X9oON6TeEC/h17pXO44pZ5YyGdMYtyw6p6M46yoX1+vviZanJBTYZBCS0
+  OUCY1GU3B/xPlzmYljnZ3u0IIfBj1WfIZLdktGluFrW99gecK3Lh3Wpnte+ML7jK
+  4szkAqidT5xJwKB2+R+59kTidERk+/Q4f+wMONUrKu3Bm6IsmpilHXTl7tJ87USK
+  3BrCzT91BbmgJN1fQvc3xvfpL0c4
 # names and passwords for administrative users
 mongodb_user_admin_name: siteUserAdmin
 mongodb_user_admin_password: passw0rd

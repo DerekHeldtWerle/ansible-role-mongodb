@@ -7,14 +7,17 @@
     - "{{ ansible_os_family }}.yml"
 
 - name: Include installation on Debian-based OS
+  become: yes
   include: "install.{{ ansible_os_family | lower }}.yml"
   tags: [mongodb]
 
 - name: Include configuration.yml
+  become: yes
   include: configure.yml
   tags: [mongodb]
 
 - name: Include replication and auth configuration
+  become: yes
   include: replication_init_auth.yml
   when: ( mongodb_replication_replset
         and mongodb_replication_replset != ''
@@ -23,11 +26,13 @@
   tags: [mongodb]
 
 - name: Include replication configuration
+  become: yes
   include: replication.yml
   when: mongodb_replication_replset and mongodb_replication_replset != ''
   tags: [mongodb]
 
 - name: Check where admin user already exists
+  become: yes
   command: >
     mongo --quiet -u {{ mongodb_user_admin_name }} \
           -p {{ mongodb_user_admin_password }} --port {{ mongodb_net_port }} --eval 'db.version()' admin
@@ -42,6 +47,7 @@
   tags: [mongodb]
 
 - name: Include authorization configuration
+  become: yes
   include: auth_initialization.yml
   when: ( mongodb_security_authorization == 'enabled'
           and (not mongodb_replication_replset
@@ -50,6 +56,7 @@
   tags: [mongodb]
 
 - name: create normal users with replicaset
+  become: yes
   mongodb_user:
     database: "{{ item.database }}"
     name: "{{ item.name }}"
@@ -70,6 +77,7 @@
   tags: [mongodb]
 
 - name: create normal users without replicaset
+  become: yes
   mongodb_user:
     database: "{{ item.database }}"
     name: "{{ item.name }}"
@@ -88,6 +96,7 @@
   tags: [mongodb]
 
 - name: Include MMS Agent configuration
+  become: yes
   include: mms-agent.yml
   when: mongodb_mms_api_key != ""
   tags: [mongodb]
